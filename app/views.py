@@ -17,7 +17,7 @@ class MyResultsSetPagination(PageNumberPagination):
 
 class ViewCreateList(generics.ListCreateAPIView):
     '''Returns a list of posts for all users'''
-    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
     queryset = Post.objects.all()
     serializer_class = ViewCreateSerializer
 
