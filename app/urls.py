@@ -1,12 +1,12 @@
 from django.urls import path, include
 
-from app.views import ViewCreateList, UpdateDetailDelete, ReadOnlyViewSet
+from app.views import PostViewSet, ReadOnlyViewSet
 from rest_framework import routers
 
 
 router = routers.DefaultRouter()
 # меняем класс ViewSet и получаем нужный функционал
-router.register(r'posts', ReadOnlyViewSet)
+router.register(r'posts', PostViewSet)
 
 
 urlpatterns = [
