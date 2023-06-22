@@ -1,6 +1,7 @@
-from rest_framework import generics, permissions, viewsets
+from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+
 from rest_framework.response import Response
 
 from app.models import Post, Category
@@ -69,4 +70,6 @@ class ReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         queryset = Post.objects.all()[:3]
         return queryset
+
+
 
