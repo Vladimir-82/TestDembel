@@ -24,3 +24,24 @@ def test_logout_user():
     response = client.post('/api-auth/logout/', payload)
 
     assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_logout_user_fail():
+    payload = {'username': 'Bob', 'password': 'Bb*123456789'}
+    response = client.post('/api-auth/login/', payload)
+
+    assert response.status_code == 200
+
+
+
+
+
+
+# @pytest.mark.django_db
+# def test_create_info():
+#     payload = {'username': 'test_user', 'password': 'Bb*12345678'}
+#     client.post('/api-auth/login/', payload)
+#     response = client.get('/api/v1/posts/')
+#
+#     assert response.status_code == 200
