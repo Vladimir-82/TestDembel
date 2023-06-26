@@ -1,14 +1,9 @@
 import pytest
-from django.contrib.auth.models import User
-from rest_framework.test import APIClient
-
-client = APIClient()
 
 
 @pytest.mark.django_db
-def test_login_user() -> None:
+def test_login_user(user, client) -> None:
     """Login user"""
-    User.objects.create_user(username='test_user', password='Bb*12345678')
     payload = {'username': 'test_user', 'password': 'Bb*12345678'}
     response = client.post('/api-auth/login/', payload)
 
@@ -16,20 +11,15 @@ def test_login_user() -> None:
 
 
 @pytest.mark.django_db
-def test_logout_user() -> None:
+def test_logout_user(user, auth_client) -> None:
     """Logout user"""
-    User.objects.create_user(username='test_user', password='Bb*12345678')
-    payload = {'username': 'test_user', 'password': 'Bb*12345678'}
-    client.post('/api-auth/login/', payload)
-
-    response = client.post('/api-auth/logout/', payload)
-
+    response = auth_client.post('/api-auth/logout/')
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_logout_user_fail() -> None:
-    """Fail logout user"""
+def test_login_user_fail(client) -> None:
+    """Fail login user"""
     payload = {'username': 'Bob', 'password': 'Bb*123456789'}
     response = client.post('/api-auth/login/', payload)
 
