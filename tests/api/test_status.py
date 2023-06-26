@@ -2,13 +2,13 @@ import pytest
 
 
 @pytest.mark.django_db
-def test_post_info(auth_client, user, cat) -> None:
+def test_post_info(auth_client, user, category) -> None:
     """create information"""
     created = {"author": user.pk,
             "title": "Record",
             "body": "Some sport content",
             "views": 32,
-            "category": cat.pk,
+            "category": category.pk,
             }
 
     response = auth_client.post('/api/v1/posts/', created)
@@ -20,17 +20,17 @@ def test_post_info(auth_client, user, cat) -> None:
     assert data["body"] == created["body"]
     assert data["views"] == created["views"]
     assert user.pk == created["author"]
-    assert cat.pk == created["category"]
+    assert category.pk == created["category"]
 
 
 @pytest.mark.django_db
-def test_get_info(auth_client, user, cat) -> None:
+def test_get_info(auth_client, user, category) -> None:
     """get information"""
     new_data = {"author": user.pk,
             "title": "Record",
             "body": "Some sport content",
             "views": 32,
-            "category": cat.pk,
+            "category": category.pk,
             }
 
     auth_client.post('/api/v1/posts/', new_data)
@@ -50,22 +50,22 @@ def test_get_detail_false_404(auth_client) -> None:
 
 
 @pytest.mark.django_db
-def test_update_info(auth_client, user, cat) -> None:
+def test_update_info(auth_client, user, category) -> None:
     """update information"""
     old_data = {"author": user.pk,
             "title": "Record",
             "body": "Some sport content",
             "views": 32,
-            "category": cat.pk,
+            "category": category.pk,
             }
 
     auth_client.post('/api/v1/posts/', old_data)
 
     new_data = {"author": user.pk,
                 "title": "Shame",
-                "body": "Pidori",
+                "body": "Some content",
                 "views": 14,
-                "category": cat.pk,
+                "category": category.pk,
                 }
 
     response = auth_client.put('/api/v1/posts/1/', new_data)
@@ -77,14 +77,14 @@ def test_update_info(auth_client, user, cat) -> None:
 
 
 @pytest.mark.django_db
-def test_delete_info(auth_client, user, cat) -> None:
+def test_delete_info(auth_client, user, category) -> None:
     """delete information"""
 
     data = {"author": user.pk,
             "title": "Record",
             "body": "Some sport content",
             "views": 32,
-            "category": cat.pk,
+            "category": category.pk,
             }
 
     auth_client.post('/api/v1/posts/', data)

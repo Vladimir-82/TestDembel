@@ -29,6 +29,6 @@ def auth_client(user, client):
 
 
 @pytest.fixture
-def cat():
-    cat = Category.objects.create(title="test_category")
-    return cat
+def category():
+    category = Category.objects.create(title="test_category")
+    return category
