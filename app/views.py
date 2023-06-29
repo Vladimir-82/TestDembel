@@ -39,7 +39,7 @@ class UpdateDetailDelete(generics.RetrieveUpdateDestroyAPIView):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = ViewCreateSerializer
-    permission_classes = (IsAuthorOrReadOnly,)
+    # permission_classes = (IsAuthorOrReadOnly,)
     pagination_class = MyResultsSetPagination
 
     # один параметр
@@ -70,6 +70,3 @@ class ReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         queryset = Post.objects.all()[:3]
         return queryset
-
-
-

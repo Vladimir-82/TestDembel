@@ -1,8 +1,10 @@
 import pytest
+from mixer.backend.django import mixer
+
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 
-from app.models import Category
+from app.models import Category, Post
 
 
 @pytest.fixture
@@ -41,12 +43,6 @@ def category():
 @pytest.fixture
 def post(user, auth_client, category):
     """create post"""
-    created = {"author": user.pk,
-               "title": "Record",
-               "body": "Some sport content",
-               "views": 32,
-               "category": category.pk,
-               }
+    test_object = mixer.blend(Post)
 
-    response = auth_client.post('/api/v1/posts/', created)
-    return response, created
+    return test_object
