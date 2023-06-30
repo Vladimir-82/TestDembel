@@ -1,5 +1,7 @@
 import pytest
 
+from app.models import Category
+
 
 @pytest.mark.django_db
 def test_get_info(auth_client, post) -> None:
@@ -29,9 +31,11 @@ def test_get_detail_false_404(auth_client) -> None:
 @pytest.mark.django_db
 def test_update_info(auth_client, post) -> None:
     """update information"""
+    new_category = Category.objects.create(title="another_category")
     new_data = {"title": "Shame",
                 "body": "Some_content",
                 "views": 14,
+                "category": new_category.pk,
                 }
 
     response = auth_client.put(f'/api/v1/posts/{post.pk}/', new_data)
@@ -40,6 +44,7 @@ def test_update_info(auth_client, post) -> None:
     assert data["body"] == new_data["body"]
     assert data["title"] == new_data["title"]
     assert data["views"] == new_data["views"]
+    assert data["category"] == new_data["category"]
     assert response.status_code == 200
 
 
