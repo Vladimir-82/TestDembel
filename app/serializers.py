@@ -21,7 +21,7 @@ class ViewCreateSerializer(serializers.ModelSerializer):
         model = Post
 
 
-class OnlyReadalizer(serializers.ModelSerializer):
+class Top3Readalizer(serializers.ModelSerializer):
 
     class Meta:
         fields = '__all__'

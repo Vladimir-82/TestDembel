@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from app.views import PostViewSet, ReadOnlyViewSet, ViewCreateList
+from app.views import PostViewSet, ViewTop3
 from rest_framework import routers
 
 
@@ -15,6 +15,9 @@ urlpatterns = [
 
     # path('posts', PostViewSet.as_view({'get': 'list'}), name='view'),
     # path('posts/<int:pk>/', PostViewSet.as_view({'put': 'update'}), name='update'),
+
+
+    path('posts/top3/', ViewTop3.as_view(), name='top_3'),
 
     path('', include(router.urls))
 ]

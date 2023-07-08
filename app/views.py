@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from app.models import Post, Category
-from app.serializers import ViewCreateSerializer
+from app.serializers import ViewCreateSerializer, Top3Readalizer
 from app.permissions import IsAuthorOrReadOnly
 
 
@@ -63,10 +63,10 @@ class PostViewSet(viewsets.ModelViewSet):
         )
 
 
-class ReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+class ViewTop3(generics.ListCreateAPIView):
     queryset = Post.objects.all()
-    serializer_class = ViewCreateSerializer
+    serializer_class = Top3Readalizer
 
     def get_queryset(self):
-        queryset = Post.objects.all()[:3]
+        queryset = Post.objects.all().order_by("-views")[:3]
         return queryset
