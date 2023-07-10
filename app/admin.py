@@ -5,10 +5,14 @@ from .models import *
 class PostAdmin(admin.ModelAdmin):
     save_on_top = True
     # empty_value_display = "-empty-" does not work
-    list_display = ["title", "category"]
+    list_display = ["author", "title", "category", "views"]
+    list_display_links = ["title", "category"]
     readonly_fields = ["category",]
+    search_fields = ["title", "body"]
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
 
+admin.site.site_title = "Vladimir" #название страницы в браузере
+admin.site.site_header = "Vladimir" #заголовок
