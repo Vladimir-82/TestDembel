@@ -8,7 +8,6 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ["author", "title", "category", "views"]
     list_display_links = ["title", "category"]
     readonly_fields = ["category",]
-    search_fields = ["title", "body"]
 
 
 admin.site.register(Post, PostAdmin)
