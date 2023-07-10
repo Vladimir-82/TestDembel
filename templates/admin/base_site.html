@@ -11,6 +11,10 @@
 
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+
+<a href="{% url 'admin:index' %}">
+    <img src="{% static 'img/logo-alfa.jpg' %}" alt="Лого" class="logo" height="50">
+</a>
 {% endblock %}
 
 {% block nav-global %}
