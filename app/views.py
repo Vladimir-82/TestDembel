@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
@@ -7,6 +8,8 @@ from rest_framework.response import Response
 from app.models import Post, Category
 from app.serializers import ViewCreateSerializer, Top3Readalizer
 from app.permissions import IsAuthorOrReadOnly
+
+import random
 
 
 

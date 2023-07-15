@@ -18,6 +18,5 @@ urlpatterns = [
 
 
     path('posts/top3/', ViewTop3.as_view(), name='top_3'),
-
     path('', include(router.urls))
 ]

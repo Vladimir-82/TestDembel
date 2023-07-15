@@ -3,6 +3,9 @@ from .models import *
 
 
 class PostAdmin(admin.ModelAdmin):
+
+    change_list_template = "app/posts_changelist.html"
+
     save_on_top = True
     # empty_value_display = "-empty-" does not work
     list_display = ["author", "title", "category", "views"]
