@@ -6,6 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')), # подключение авторизации по сессии
     path('api/v1/', include('app.urls')),
-    # path('admin/app/post', get_code, name='generate'),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
