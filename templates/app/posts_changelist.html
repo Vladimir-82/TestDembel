@@ -9,13 +9,25 @@
 
 <script>
 $("#input-generate").click(function(){
-	$("#input-password").val(generatePassword());
+	 var $input = $("#input-password");
+	 $input.val('');
+
+	 var pass = generatePassword();
+	 var txt = pass.split("");
+	 var interval = setInterval(function(){
+	 	if(!txt[0]){
+			clearInterval(interval);
+		} else {
+			$input.val($input.val() + txt.shift());
+		}
+	}, 50);
+
 	return false;
 });
 
 function generatePassword(){
-	var length = 8,
-	charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@-#$";
+	var length = 10,
+	charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-";
 	if(window.crypto && window.crypto.getRandomValues) {
 		return Array(length)
 			.fill(charset)

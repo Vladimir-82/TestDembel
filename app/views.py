@@ -41,14 +41,24 @@ class UpdateDetailDelete(generics.RetrieveUpdateDestroyAPIView):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = ViewCreateSerializer
-    # permission_classes = (IsAuthorOrReadOnly,)
+    permission_classes = (IsAuthorOrReadOnly,)
     pagination_class = MyResultsSetPagination
 
+
+    def get_object(self):
+        '''
+        Increases the number of views
+        '''
+        object = super().get_object()
+        object.views += 1
+        object.save()
+        return object
+
     # один параметр
-    @action(methods=['get'], detail=True)
-    def category(self, request, pk=None):
-        cat = Category.objects.get(pk=pk)
-        return Response({'category': cat.title})
+    # @action(methods=['get'], detail=True)
+    # def category(self, request, pk=None):
+    #     cat = Category.objects.get(pk=pk)
+    #     return Response({'category': cat.title})
 
     # группа параметров
     @action(methods=['get'], detail=False)
