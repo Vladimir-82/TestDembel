@@ -13,6 +13,14 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ["author", "title", "category", "views",]
     list_display_links = ["title", "category"]
     readonly_fields = ["category",]
+    search_fields = ['body',]
+    search_help_text = 'Введите строку для поиска'
+
+
+    # def get_queryset(self, request):
+    #     queryset = super().get_queryset(request)
+    #     queryset.views = 0
+    #     return queryset
 
 
     def make_zero_views(self, obj):
